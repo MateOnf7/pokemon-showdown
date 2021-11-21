@@ -7107,4 +7107,26 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 6,
 		isNonstandard: "CAP",
 	},
+	yelloworb: {
+		name: "Yellow Orb",
+		spritenum: 390,
+		onSwitchIn(pokemon) {
+			if (pokemon.isActive && pokemon.baseSpecies.name === 'Beedrill') {
+				this.queue.insertChoice({choice: 'runPrimal', pokemon: pokemon});
+			}
+		},
+		onPrimal(pokemon) {
+			pokemon.formeChange('Beedrill-Primal', this.effect, true);
+		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Beedrill') return false;
+			return true;
+		},
+		itemUser: ["Beedrill"],
+		num: 534,
+		gen: 6,
+		isNonstandard: "Past",
+	},
 };
+
+
